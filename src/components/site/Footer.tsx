@@ -1,9 +1,11 @@
-  export function Footer() {
+import logo from "../img/Logo.svg";
+
+export function Footer() {
     return (
       <footer className="border-t border-border/40 bg-background py-12">
         <div className="mx-auto grid max-w-7xl gap-8 px-6 md:grid-cols-4">
           <div> 
-            <img src="/src/components/img/Logo.svg" alt="Play Analytics" className="h-15" draggable={false} />  
+            <img src={logo} alt="Play Analytics" className="h-15" draggable={false} />
             <p className="mt-2 text-sm text-muted-foreground">Inteligência para o turismo esportivo regional do Paraná.</p>
           </div>
           <div>

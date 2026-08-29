@@ -14,6 +14,7 @@ import { Link } from "@tanstack/react-router";
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useMockAuth } from "@/routes/__root";
+import logo from "../img/Logo.svg";
 
 const navItems: { label: string; icon: LucideIcon; to: "/organizadores" | "/organizadores/eventos" | "/organizadores/patrocinadores" | "/organizadores/relatorios" | "/organizadores/ranking" }[] = [
   { label: "Visão geral", icon: LayoutDashboard, to: "/organizadores" },
@@ -30,7 +31,7 @@ export function OrganizerLayout({ active, children }: { active: string; children
 function OrganizerSidebar({ active }: { active: string }) {
   const { accountName, isAuthenticated } = useMockAuth();
   return <aside className="sticky top-0 hidden h-screen w-64 shrink-0 border-r border-border bg-surface/40 p-5 lg:block">
-    <Link to="/" className="flex items-center gap-2"><img src="/src/components/img/Logo.svg" alt="Play Analytics" className="h-15" draggable={false} /></Link>
+    <Link to="/" className="flex items-center gap-2"><img src={logo} alt="Play Analytics" className="h-15" draggable={false} /></Link>
     {isAuthenticated ? <div className="mt-6 rounded-2xl border border-lime/20 bg-lime/10 p-4"><p className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">Conta ativa</p><p className="mt-1 font-mono text-sm font-semibold">{accountName}</p></div> : null}
     <nav className="mt-8 space-y-1 text-sm">{navItems.map(({ label, icon: Icon, to }) => <Link key={label} to={to} activeOptions={{ exact: to === "/organizadores" }} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-muted-foreground transition-colors hover:bg-surface hover:text-foreground" activeProps={{ className: "bg-lime/15 text-lime" }}><Icon className="h-4 w-4" />{label}</Link>)}</nav>
     <div className="mt-8 rounded-2xl border border-border bg-gradient-card p-4"><p className="text-xs uppercase tracking-widest text-lime">Visão rápida</p><p className="mt-2 text-sm font-semibold">Sua próxima agenda está 82% preenchida.</p><Link to="/organizadores/eventos" className="mt-3 flex items-center gap-1 text-xs font-semibold text-primary">Abrir agenda <ChevronRight className="h-3.5 w-3.5" /></Link></div>

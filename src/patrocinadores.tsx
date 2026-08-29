@@ -18,6 +18,7 @@ import {
 import { BarChart } from "@/components/site/Chart";
 import { CountUp } from "@/components/site/CountUp";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import logo from "@/components/img/Logo.svg";
 
 export type SponsorNavKey = "discover" | "events" | "roi" | "calendar" | "ranking";
 
@@ -34,7 +35,7 @@ export function SponsorSidebar({ active }: { active: SponsorNavKey }) {
     <aside className="sticky top-0 hidden h-screen w-64 shrink-0 border-r border-border bg-surface/40 p-5 lg:block">
       <Link to="/" className="flex items-center gap-2">
         <img
-          src="/src/components/img/Logo.svg"
+          src={logo}
           alt="Play Analytics"
           className="h-15"
           draggable={false}
