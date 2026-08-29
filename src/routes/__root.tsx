@@ -8,6 +8,7 @@ import {
   Outlet,
   Scripts,
   createRootRouteWithContext,
+  useLocation,
   useRouter,
 } from "@tanstack/react-router";
 
@@ -201,8 +202,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
   const [showWelcome, setShowWelcome] = React.useState(true);
+  const isFormPage = location.pathname === "/form";
 
   const signIn = () => {
     setIsAuthenticated(true);
@@ -222,59 +225,61 @@ function RootComponent() {
 
         <Outlet />
 
-        <WelcomeDialog
-          open={!isAuthenticated && showWelcome}
-          onOpenChange={(open) => {
-            if (isAuthenticated) {
-              setShowWelcome(open);
-            }
-          }}
-        >
-          <WelcomeDialogContent>
-            <WelcomeDialogHeader>
-              <WelcomeDialogBadge>
-                <BadgeCheck className="h-3.5 w-3.5" />
-                Conta demo do MVP
-              </WelcomeDialogBadge>
+        {!isFormPage ? (
+          <WelcomeDialog
+            open={!isAuthenticated && showWelcome}
+            onOpenChange={(open) => {
+              if (isAuthenticated) {
+                setShowWelcome(open);
+              }
+            }}
+          >
+            <WelcomeDialogContent>
+              <WelcomeDialogHeader>
+                <WelcomeDialogBadge>
+                  <BadgeCheck className="h-3.5 w-3.5" />
+                  Conta demo do MVP
+                </WelcomeDialogBadge>
 
-              <WelcomeDialogTitle>
-                Entre com a sessão simulada
-              </WelcomeDialogTitle>
+                <WelcomeDialogTitle>
+                  Entre com a sessão simulada
+                </WelcomeDialogTitle>
 
-              <WelcomeDialogDescription>
-                Esta demonstração usa uma autenticação mock apenas para apresentar o fluxo do produto.
-              </WelcomeDialogDescription>
-            </WelcomeDialogHeader>
+                <WelcomeDialogDescription>
+                  Esta demonstração usa uma autenticação mock apenas para apresentar o fluxo do produto.
+                </WelcomeDialogDescription>
+              </WelcomeDialogHeader>
 
-            <div className="relative mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
-              <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#8cff24]/15 text-[#8cff24]">
-                  <Building2 className="h-5 w-5" />
-                </div>
+              <div className="relative mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#8cff24]/15 text-[#8cff24]">
+                    <Building2 className="h-5 w-5" />
+                  </div>
 
-                <div className="space-y-1">
-                  <p className="text-xs uppercase tracking-[0.24em] text-gray-400">
-                    Conta ativa
-                  </p>
+                  <div className="space-y-1">
+                    <p className="text-xs uppercase tracking-[0.24em] text-gray-400">
+                      Conta ativa
+                    </p>
 
-                  <p className="font-mono text-lg font-semibold text-white">
-                    {MOCK_ACCOUNT_NAME}
-                  </p>
+                    <p className="font-mono text-lg font-semibold text-white">
+                      {MOCK_ACCOUNT_NAME}
+                    </p>
 
-                  <p className="text-sm leading-6 text-gray-400">
-                    Clique em Entrar para alternar o app para o estado logado.
-                  </p>
+                    <p className="text-sm leading-6 text-gray-400">
+                      Clique em Entrar para alternar o app para o estado logado.
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <WelcomeDialogFooter>
-              <WelcomeDialogAction onClick={signIn}>
-                Entrar
-              </WelcomeDialogAction>
-            </WelcomeDialogFooter>
-          </WelcomeDialogContent>
-        </WelcomeDialog>
+              <WelcomeDialogFooter>
+                <WelcomeDialogAction onClick={signIn}>
+                  Entrar
+                </WelcomeDialogAction>
+              </WelcomeDialogFooter>
+            </WelcomeDialogContent>
+          </WelcomeDialog>
+        ) : null}
       </MockAuthContext.Provider>
     </QueryClientProvider>
   );

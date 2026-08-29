@@ -35,11 +35,9 @@ function PlayEventsPage() {
 
         <div className="grid gap-5 md:grid-cols-2">
           {playEvents.map((event) => (
-            <a
+            <Link
               key={event.id}
-              href="https://www.sympla.com.br/"
-              target="_blank"
-              rel="noopener noreferrer"
+              to="/form"
               className="group block rounded-3xl border border-border bg-gradient-card p-5 shadow-card transition-transform hover:-translate-y-1 hover:border-lime/40"
             >
               <div className="flex items-start justify-between gap-3">
@@ -107,7 +105,7 @@ function PlayEventsPage() {
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

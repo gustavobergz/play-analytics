@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PlayeventsRouteImport } from './routes/playevents'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as PatrocinadoresRouteImport } from './routes/patrocinadores'
+import { Route as FormRouteImport } from './routes/form'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OrganizadoresIndexRouteImport } from './routes/organizadores/index'
 import { Route as PlayeventsEventIdRouteImport } from './routes/playevents/$eventId'
@@ -37,6 +38,11 @@ const PerfilRoute = PerfilRouteImport.update({
 const PatrocinadoresRoute = PatrocinadoresRouteImport.update({
   id: '/patrocinadores',
   path: '/patrocinadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FormRoute = FormRouteImport.update({
+  id: '/form',
+  path: '/form',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -99,6 +105,7 @@ const OrganizadoresEventosRoute = OrganizadoresEventosRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/form': typeof FormRoute
   '/patrocinadores': typeof PatrocinadoresRoute
   '/perfil': typeof PerfilRoute
   '/playevents': typeof PlayeventsRouteWithChildren
@@ -115,6 +122,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/form': typeof FormRoute
   '/patrocinadores': typeof PatrocinadoresRoute
   '/perfil': typeof PerfilRoute
   '/playevents': typeof PlayeventsRouteWithChildren
@@ -132,6 +140,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/form': typeof FormRoute
   '/patrocinadores': typeof PatrocinadoresRoute
   '/perfil': typeof PerfilRoute
   '/playevents': typeof PlayeventsRouteWithChildren
@@ -150,6 +159,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/form'
     | '/patrocinadores'
     | '/perfil'
     | '/playevents'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/form'
     | '/patrocinadores'
     | '/perfil'
     | '/playevents'
@@ -182,6 +193,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/form'
     | '/patrocinadores'
     | '/perfil'
     | '/playevents'
@@ -199,6 +211,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FormRoute: typeof FormRoute
   PatrocinadoresRoute: typeof PatrocinadoresRoute
   PerfilRoute: typeof PerfilRoute
   PlayeventsRoute: typeof PlayeventsRouteWithChildren
@@ -234,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/patrocinadores'
       fullPath: '/patrocinadores'
       preLoaderRoute: typeof PatrocinadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/form': {
+      id: '/form'
+      path: '/form'
+      fullPath: '/form'
+      preLoaderRoute: typeof FormRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -330,6 +350,7 @@ const PlayeventsRouteWithChildren = PlayeventsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FormRoute: FormRoute,
   PatrocinadoresRoute: PatrocinadoresRoute,
   PerfilRoute: PerfilRoute,
   PlayeventsRoute: PlayeventsRouteWithChildren,

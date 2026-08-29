@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import logo from "../img/Logo.svg";
+import playEventsLogo from "../img/LogoPlayEvents.svg";
 import { useMockAuth } from "@/routes/__root";
 
 const navLinks = [
@@ -13,14 +14,28 @@ const navLinks = [
   { label: "Benefícios", href: "#beneficios" },
 ];
 
-export function Nav() {
+export function Nav({ showActions = true, logoSrc = logo }: { showActions?: boolean; logoSrc?: string }) {
   const { accountName, isAuthenticated } = useMockAuth();
+
+  if (!showActions) {
+    return (
+      <header className="sticky top-0 z-50 border-b border-border/40 bg-background/70 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logoSrc} alt="Logo" className="h-10 w-auto sm:h-12" draggable={false} />
+          </Link>
+
+          <div className="h-10 w-10" aria-hidden="true" />
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/40 bg-background/70 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Logo" className="h-10 w-auto sm:h-12" draggable={false} />
+          <img src={logoSrc} alt="Logo" className="h-10 w-auto sm:h-12" draggable={false} />
         </Link>
 
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
@@ -101,7 +116,7 @@ export function Nav() {
             <SheetContent side="right" className="w-[85vw] max-w-sm p-0">
               <div className="border-b border-border/40 p-4">
                 <Link to="/" className="flex items-center gap-2">
-                  <img src={logo} alt="Logo" className="h-10 w-auto" draggable={false} />
+                  <img src={logoSrc} alt="Logo" className="h-10 w-auto" draggable={false} />
                 </Link>
               </div>
 
@@ -131,14 +146,14 @@ export function Nav() {
                     <>
                       <Link
                         to="/perfil"
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-lime px-5 py-2.5 text-sm font-semibold text-lime-foreground shadow-lime"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground"
                       >
                         <Building2 className="h-4 w-4" />
                         {accountName}
                       </Link>
                       <Link
                         to="/playevents"
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-lime px-5 py-2.5 text-sm font-semibold text-lime-foreground shadow-lime"
                       >
                         <CalendarDays className="h-4 w-4" />
                         PlayEvents
