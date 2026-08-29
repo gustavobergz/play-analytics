@@ -2,26 +2,31 @@ import { Link } from "@tanstack/react-router";
 import {
   BarChart3,
   Calendar,
+  ChevronRight,
   Compass,
   Heart,
   MapPin,
   Menu,
+  MoreHorizontal,
   Search,
   Sparkles,
   TrendingUp,
+  Trophy,
   Users,
 } from "lucide-react";
 
 import { BarChart } from "@/components/site/Chart";
 import { CountUp } from "@/components/site/CountUp";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
-export type SponsorNavKey = "discover" | "events" | "roi" | "calendar";
+export type SponsorNavKey = "discover" | "events" | "roi" | "calendar" | "ranking";
 
 const nav = [
   { icon: Compass, label: "Descobrir", to: "/patrocinadores", key: "discover" },
   { icon: Heart, label: "Meus eventos", to: "/patrocinadores/eventos", key: "events" },
   { icon: BarChart3, label: "ROI", to: "/patrocinadores/roi", key: "roi" },
   { icon: Calendar, label: "Calendário", to: "/patrocinadores/calendario", key: "calendar" },
+  { icon: Trophy, label: "Ranking de eventos", to: "/patrocinadores/ranking", key: "ranking" },
 ] as const;
 
 export function SponsorSidebar({ active }: { active: SponsorNavKey }) {
@@ -95,6 +100,9 @@ export function SponsorShell({
 }
 
 function SponsorTopbar({ section }: { section: string }) {
+  const visibleItems = nav.slice(0, 2);
+  const overflowItems = nav.slice(2);
+
   return (
     <header className="border-b border-border bg-background/90 px-4 py-3 backdrop-blur sm:px-6 lg:px-8">
       <div className="flex items-center justify-between gap-4">
@@ -107,23 +115,26 @@ function SponsorTopbar({ section }: { section: string }) {
           <span className="mx-2 text-border">/</span>
           {section}
         </div>
-        <div className="flex items-center gap-3">
+        <Link
+          to="/perfil"
+          className="group flex items-center gap-3 rounded-2xl border border-border/60 bg-surface/40 px-3 py-2 transition-all hover:border-lime/40 hover:bg-lime/5"
+        >
           <span className="hidden text-right sm:block">
             <span className="block text-xs text-muted-foreground font-bold">Patrocinador</span>
-            <span className="text-sm font-semibold">CEFE - UEL</span>
+            <span className="text-sm font-semibold text-foreground transition-colors group-hover:text-lime">CEFE - UEL</span>
           </span>
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 text-sm font-bold text-primary">
             CE
           </span>
-        </div>
+        </Link>
       </div>
 
-      <nav className="mt-3 flex gap-2 overflow-x-auto pb-1 lg:hidden">
-        {nav.map(({ icon: Icon, label, to, key }) => (
+      <div className="mt-3 flex items-center gap-2 lg:hidden">
+        {visibleItems.map(({ icon: Icon, label, to, key }) => (
           <Link
             key={label}
             to={to}
-            className="flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold text-muted-foreground"
+            className="flex flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold text-muted-foreground"
             activeProps={{ className: "bg-lime/15 text-lime" }}
             activeOptions={{ exact: key === "discover" }}
           >
@@ -131,7 +142,38 @@ function SponsorTopbar({ section }: { section: string }) {
             {label}
           </Link>
         ))}
-      </nav>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <button
+              type="button"
+              className="flex items-center gap-1 rounded-lg border border-border/60 bg-surface/60 px-2.5 py-2 text-[10px] font-semibold text-muted-foreground"
+            >
+              Mais
+              <MoreHorizontal className="h-3 w-3" />
+            </button>
+          </DialogTrigger>
+          <DialogContent className="w-[calc(100vw-2rem)] max-w-sm rounded-2xl border-border bg-background p-0 sm:rounded-2xl">
+            <DialogHeader className="border-b border-border p-4 text-left">
+              <DialogTitle className="text-base font-semibold">Mais opções</DialogTitle>
+            </DialogHeader>
+            <div className="grid gap-2 p-3">
+              {overflowItems.map(({ icon: Icon, label, to, key }) => (
+                <Link
+                  key={label}
+                  to={to}
+                  className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  activeProps={{ className: "bg-lime/15 text-lime" }}
+                  activeOptions={{ exact: key === "discover" }}
+                >
+                  <Icon className="h-4 w-4" />
+                  {label}
+                </Link>
+              ))}
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
     </header>
   );
 }
@@ -157,7 +199,7 @@ function HeaderBar() {
           Descubra eventos para a CEFE - UEL
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          87 eventos no Paraná esta temporada — <span className="font-semibold text-lime">12 com alto fit</span> com sua marca.
+          87 eventos no Paraná nesta temporada — <span className="font-semibold text-lime">12 com alto potencial</span> para sua marca.
         </p>
       </div>
     </div>

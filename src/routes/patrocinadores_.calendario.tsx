@@ -26,41 +26,43 @@ const agenda = [
 function CalendarPage() {
   return (
     <SponsorShell active="calendar" section="Calendário">
-      <div className="rounded-3xl border border-border bg-gradient-card p-6 shadow-card">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-lime">
+      <div className="rounded-3xl border border-border bg-gradient-card p-4 shadow-card sm:p-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div className="min-w-0">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-lime sm:text-xs">
               Agenda esportiva
             </p>
-            <h1 className="mt-2 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+            <h1 className="mt-2 font-display text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">
               Calendário de eventos
             </h1>
           </div>
-
         </div>
 
-        <div className="mt-6 grid gap-5 xl:grid-cols-[1.4fr_0.9fr]">
-          <div className="rounded-2xl border border-border bg-surface p-4">
-            <div className="grid gap-3 sm:grid-cols-7">
+        <div className="mt-6 grid gap-4 xl:grid-cols-[minmax(0,1.4fr)_minmax(260px,0.9fr)]">
+          <div className="rounded-2xl border border-border bg-surface p-3 sm:p-4">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
               {days.map(({ day, date }) => (
                 <div
                   key={day}
-                  className={`rounded-2xl border p-3 text-center ${
+                  className={`rounded-2xl border p-2 text-center sm:p-3 ${
                     date === 10
                       ? "border-lime bg-lime/15 text-lime"
                       : "border-border bg-background text-muted-foreground"
                   }`}
                 >
-                  <p className="text-[11px] uppercase tracking-[0.2em]">{day}</p>
-                  <p className="mt-2 text-xl font-bold">{date}</p>
+                  <p className="text-[10px] uppercase tracking-[0.2em] sm:text-[11px]">{day}</p>
+                  <p className="mt-2 text-lg font-bold sm:text-xl">{date}</p>
                 </div>
               ))}
             </div>
 
             <div className="mt-5 space-y-3">
               {agenda.map((item) => (
-                <div key={`${item.day}-${item.label}`} className="flex items-center gap-3 rounded-xl border border-border bg-background p-3">
-                  <span className="w-12 text-sm font-semibold text-muted-foreground">{item.time}</span>
+                <div
+                  key={`${item.day}-${item.label}`}
+                  className="flex flex-col gap-2 rounded-xl border border-border bg-background p-3 sm:flex-row sm:items-center"
+                >
+                  <span className="text-sm font-semibold text-muted-foreground sm:w-12">{item.time}</span>
                   <span className={`flex-1 rounded-full px-3 py-2 text-sm font-semibold ${item.slot}`}>
                     {item.label}
                   </span>
@@ -69,7 +71,7 @@ function CalendarPage() {
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-1">
             <div className="rounded-2xl border border-border bg-surface p-4">
               <p className="text-xs uppercase tracking-widest text-muted-foreground">
                 Oportunidades

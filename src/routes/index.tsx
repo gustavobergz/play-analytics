@@ -53,11 +53,11 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link to="/organizadores" className="group inline-flex items-center gap-2 rounded-full bg-lime px-5 py-3 text-sm font-semibold text-lime-foreground shadow-lime transition-transform hover:scale-105">
-              Sou Organizador
+              Sou organizador
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link to="/patrocinadores" className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-5 py-3 text-sm font-semibold backdrop-blur transition-colors hover:bg-surface">
-              Sou Patrocinador
+              Sou patrocinador
             </Link>
           </div>
           <div className="mt-10 flex gap-8 border-t border-border/60 pt-6">
@@ -75,7 +75,7 @@ function Hero() {
                 Pesquisa Plataforma Play Analytics
               </h2>
               <p className="max-w-xl text-base text-muted-foreground md:text-lg">
-                Ajude-nos a personalizar sua experiência respondendo a pesquisa abaixo:
+                Ajude-nos a personalizar sua experiência respondendo à pesquisa abaixo:
               </p>
               <div className="flex items-center gap-3">
 

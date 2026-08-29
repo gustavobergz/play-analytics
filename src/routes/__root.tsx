@@ -128,7 +128,7 @@ export const Route =
         {
           name: "title",
           content:
-            "Play Analytics - Inteligencia para o Turismo Esportivo do Parana",
+            "Play Analytics - Inteligência para o Turismo Esportivo do Paraná",
         },
         {
           name: "description",
@@ -142,7 +142,7 @@ export const Route =
         {
           property: "og:description",
           content:
-            "Dados, ROI e impacto turistico para eventos esportivos regionais.",
+            "Dados, ROI e impacto turístico para eventos esportivos regionais.",
         },
         {
           property: "og:type",
@@ -238,12 +238,11 @@ function RootComponent() {
               </WelcomeDialogBadge>
 
               <WelcomeDialogTitle>
-                Entre com a sessao simulada
+                Entre com a sessão simulada
               </WelcomeDialogTitle>
 
               <WelcomeDialogDescription>
-                Esta demonstracao usa uma autenticacao mock apenas para
-                apresentar o fluxo do produto.
+                Esta demonstração usa uma autenticação mock apenas para apresentar o fluxo do produto.
               </WelcomeDialogDescription>
             </WelcomeDialogHeader>
 
@@ -291,7 +290,7 @@ function MockSessionBanner() {
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-lime text-lime-foreground">
             <BadgeCheck className="h-4 w-4" />
           </span>
-          Sessao mock ativa para a conta {accountName}
+          Sessão mock ativa para a conta {accountName}
         </div>
 
         <span className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
